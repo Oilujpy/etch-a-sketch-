@@ -13,8 +13,12 @@ const createSquare = function () {
 }
 
 const handleHover = function (element, index) {
+    const randomizeColor = function () {
+        let color = Math.floor(Math.random() * 250);
+        return color;
+    }
     element.addEventListener("mouseover", () => {
-        element.style.backgroundColor = "#eab676";
+        element.style.backgroundColor = `rgb(${randomizeColor()}, ${randomizeColor()}, ${randomizeColor()})`;
     })
 }
 
