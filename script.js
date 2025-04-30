@@ -12,33 +12,34 @@ const createSquare = function () {
     return square;
 }
 
-const handleHover = function (element) {
+const handleHover = function (element, index) {
     element.addEventListener("mouseover", () => {
         element.style.backgroundColor = "#eab676";
     })
 }
 
+const clearContainer = function (element) {
+    element.innerHTML = "";
+}
+
+const fillGrid = function (input) {
+    for (let index = 1; index < Math.pow(input, 2) + 1; index++) {
+        const squareDiv = createSquare();
+        squareDiv.setAttribute("class", "square");
+        squareDiv.setAttribute("style", `width: ${calculateSquareSize(input)}px; height: ${calculateSquareSize(input)}px`);
+        containerDiv.appendChild(squareDiv);
+        handleHover(squareDiv);
+    }
+}
 
 button.addEventListener("click", () => {
     let input = Number(prompt("Enter a number equal or smaller than 100:"));
-    if (input > 100) {
-        alert("The number must be smaller than 100. Try again!");
-        input = Number(prompt("Enter a number smaller than 100:"));        
+    while (input > 100 || input <= 0) {
+        input = Number(prompt("The number must be greater than 0 and smaller than 100. Try again!:"));
     }
+    clearContainer(containerDiv);
+    fillGrid(input);
 })
 
-const test = 100;
-console.log(calculateSquareSize(test));
-
-
-const fillGrid = function () {
-    const squareDiv = createSquare();
-    squareDiv.setAttribute("class", "square");
-    squareDiv.setAttribute("style", `width: ${calculateSquareSize(test)}px; height: ${calculateSquareSize(test)}px`);
-    containerDiv.appendChild(squareDiv);
-    handleHover(squareDiv);
-}
-
-for (let index = 1; index < Math.pow(test ,2) + 1; index++) {
-    fillGrid();
-}
+// placeholder matrix
+fillGrid(12); 
